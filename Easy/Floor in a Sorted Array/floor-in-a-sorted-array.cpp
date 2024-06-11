@@ -4,34 +4,22 @@ using namespace std;
 
 
 // } Driver Code Ends
-
 class Solution{
   public:
     // Function to find floor of x
     // n: size of vector
     // x: element whose floor is to find
     int findFloor(vector<long long> v, long long n, long long x){
-        
-        // Your code here
-        long long s = 0 , e = n-1;
-        long long ans=-1;
-        while(s <= e ){
-            long long mid= s +(e - s)/2;
-            
-            if(x>=v[mid]){
-                ans = mid;
-                s = mid+1;
-            }
-            else if(x<v[mid]){
-                e = mid-1;
-            }
-            
+        int ans = -1;
+        for(int i=0; i<n; i++){
+            if(v[i]<=x)
+            ans = i;
         }
-        return ans;
+    return ans;
+    
         
     }
 };
-
 
 //{ Driver Code Starts.
 
