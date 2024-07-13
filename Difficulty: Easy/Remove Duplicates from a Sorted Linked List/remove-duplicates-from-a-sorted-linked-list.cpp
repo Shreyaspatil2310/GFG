@@ -65,7 +65,6 @@ struct Node {
   }
 };*/
 
-//Function to remove duplicates from sorted linked list.
 Node *removeDuplicates(Node *head)
 {
     {
@@ -81,7 +80,7 @@ Node *removeDuplicates(Node *head)
                 delete nodeToDelete;
                 curr->next = next_next;
             } else {
-                curr = curr->next; // Move to the next node only if no deletion
+                curr = curr->next; 
             }
         }
         return head;
