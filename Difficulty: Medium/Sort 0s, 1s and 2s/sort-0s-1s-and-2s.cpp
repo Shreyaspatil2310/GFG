@@ -5,24 +5,21 @@ using namespace std;
 
 
 // } Driver Code Ends
-class Solution {
-public:
-    void sort012(int nums[], int n) {
-        int i = 0, mid = 0, j = n-1; 
-        while(mid <= j) {
-            if(nums[mid] == 0) {
-                swap(nums[i],nums[mid]);
-                mid++, i++;
-            }
-            else if(nums[mid] == 1) {
-                mid++;
-            }
-            else { // nums[mid] == 2
-                swap(nums[mid],nums[j]);
-                j--;
-            }
+
+class Solution
+{
+    public:
+    void sort012(int a[], int n)
+    {
+        int i = 0, j = n - 1;
+        for(int k = 0; k <= j; k++){
+            if(a[k] == 0)
+                swap(a[i++],a[k]);
+            else if(a[k] == 2)
+                swap(a[j--], a[k--]);
         }
     }
+    
 }; 
 
 
