@@ -1,28 +1,26 @@
 //{ Driver Code Starts
-//Initial template for C++
+// Initial template for C++
 
-#include <bits/stdc++.h> 
-using namespace std; 
+#include <bits/stdc++.h>
+using namespace std;
 
-struct Node
-{
+struct Node {
     int data;
     struct Node* next;
-    
-    Node(int x){
+
+    Node(int x) {
         data = x;
         next = NULL;
     }
 };
 
-void printList(Node* node) 
-{ 
-    while (node != NULL) { 
-        cout << node->data%10; 
-        node = node->next; 
-    }  
-    cout<<"\n";
-} 
+void printList(Node* node) {
+    while (node != NULL) {
+        cout << node->data % 10;
+        node = node->next;
+    }
+    cout << "\n";
+}
 
 
 // } Driver Code Ends
@@ -71,29 +69,41 @@ Node* addOne(Node *head) {
 
 };
 
+
 //{ Driver Code Starts.
 
-int main() 
-{ 
+int main() {
     int t;
-    cin>>t;
-    while(t--)
-    {
-        string s;
-        cin>>s;
-        
-        Node* head = new Node( s[0]-'0' );
-        Node* tail = head;
-        for(int i=1; i<s.size(); i++)
-        {
-            tail->next = new Node( s[i]-'0' );
+    cin >> t;
+    cin.ignore();
+    while (t--) {
+        vector<int> arr;
+        string input;
+        getline(cin, input);
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number);
+        }
+
+        if (arr.empty()) {
+            cout << -1 << endl;
+            continue;
+        }
+
+        int data = arr[0];
+        struct Node* head = new Node(data);
+        struct Node* tail = head;
+        for (int i = 1; i < arr.size(); ++i) {
+            data = arr[i];
+            tail->next = new Node(data);
             tail = tail->next;
         }
         Solution ob;
         head = ob.addOne(head);
-        printList(head); 
+        printList(head);
     }
-    return 0; 
-} 
+    return 0;
+}
 
 // } Driver Code Ends
