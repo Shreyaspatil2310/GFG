@@ -4,22 +4,21 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
-    int maxCost(vector<int>& wt, vector<int>& val, vector<vector<int>>& dp, int i, int w) {
-        if(i==wt.size() || w<0) return 0;
-        if(dp[i][w]!=-1) return dp[i][w];
-        if(w>=wt[i]) {
-            return dp[i][w] = max(maxCost(wt, val, dp, i+1, w),
-                                  maxCost(wt, val, dp, i+1, w-wt[i])+val[i]);
+    int knapSack(int w, vector<int>& wt, vector<int>& val) {
+        int n = wt.size();
+        vector<int> nxt(w+1), cur(w+1);
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j<=w;j++){
+                int notTake = nxt[j], take = 0;
+                if(wt[i]<=j) take = val[i]+nxt[j-wt[i]];
+                cur[j] = max(take,notTake);
+            }
+            nxt=cur;
         }
-        return dp[i][w] = maxCost(wt, val, dp, i+1, w);
-    }
-    // Function to return max value that can be put in knapsack of capacity W.
-    int knapSack(int W, vector<int>& wt, vector<int>& val) {
-        // Your code here
-        vector<vector<int>> dp(wt.size(), vector<int>(W+1, -1));
-        return maxCost(wt, val, dp, 0, W);
+        return cur[w];
     }
 };
 
