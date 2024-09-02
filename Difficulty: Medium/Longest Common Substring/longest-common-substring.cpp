@@ -4,29 +4,31 @@ using namespace std;
 
 
 // } Driver Code Ends
+
+
 class Solution {
   public:
+    int n, m;
+
     int longestCommonSubstr(string str1, string str2) {
-         
-        int Len = 0;
-        string str;
+        n = str1.length();
+        m = str2.length();
         
-        int i=0;
-     while(i<str1.size()){
-            str = "";
-           int j=i;
-           while(j<str1.size()){
-                str += str1[j];
-                if(str2.find(str) <= str2.size()){
-                    Len = max(Len,j-i+1);
-                   
-                }
-                j++;
+        vector<vector<int>> dp(n+1, vector<int> (m+1, 0));
+        
+        int ans = 0;
+        
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= m; j++) {
+                if(str1[i-1]==str2[j-1]) dp[i][j] = 1+dp[i-1][j-1];
+                else dp[i][j] = 0;
+                
+                ans = max(ans, dp[i][j]);
             }
-            i++;
         }
         
-        return Len;
+        return ans;
+        
     }
 };
 
