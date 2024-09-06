@@ -8,24 +8,22 @@ using namespace std;
 // User function Template for C++
 class Solution {
   public:
-    // Function to find the sum of contiguous subarray with maximum sum.
+  
     long long maxSubarraySum(vector<int> &arr) {
-        int maxSum = arr[0];
-        int sum  = 0;
-        
-        for(int i = 0; i < arr.size(); i++){
-            if(sum >= 0){
-                sum += arr[i];
+        long long maxi = LONG_MIN;
+        long long sum = 0;
+        for(auto& num: arr) {
+            sum += num;
+            maxi = max(sum, maxi);
+            if(sum < 0) {
+                sum = 0;
             }
-            else{
-                sum = arr[i];
-            }
-            if(sum > maxSum)
-              maxSum = sum;
         }
-        return maxSum;
+        return maxi;
     }
 };
+
+
 
 //{ Driver Code Starts.
 
