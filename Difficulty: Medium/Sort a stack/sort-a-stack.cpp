@@ -39,18 +39,36 @@ while(t--)
 }
 // } Driver Code Ends
 
-void SortedStack :: sort()
-{
-   vector<int>v;
-   while(s.empty()==false)
-   {
-       v.push_back(s.top());
-       s.pop();
+/*The structure of the class is
+class SortedStack{
+public:
+	stack<int> s;
+	void sort();
+};
+*/
+/* The below method sorts the stack s 
+you are required to complete the below method */
+  void insert_right(int x,stack<int>&s){
+    if(s.size()==0 || s.top()<x) 
+    {
+        s.push(x);
+        return;
+    }
+     int a=s.top();
+     s.pop();
+     insert_right(x,s);
+     s.push(a);
+    }
+  void reverse(stack<int>&s){
+    if(s.size()==0){
+        return ;
+    }
+    
+    int x=s.top();
+    s.pop();
+    reverse(s);
+    insert_right(x,s);
    }
-   std::sort(v.begin(),v.end());
-   int n=v.size();
-   for(int i=0;i<n;i++)
-   {
-       s.push(v[i]);
+   void SortedStack :: sort(){
+       reverse(s);
    }
-}
