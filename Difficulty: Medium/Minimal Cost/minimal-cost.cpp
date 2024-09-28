@@ -6,7 +6,8 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    int solve(vector<int>& arr,vector<int>& dp,int idx, int& k){
+  
+  int solve(vector<int>& arr,vector<int>& dp,int idx, int& k){
         if(idx==0) return 0;
         
         if(dp[idx]!=-1) return dp[idx]; 
@@ -23,12 +24,19 @@ class Solution {
         }
         return dp[idx]=jmp2;
     }
-    int minimizeCost(vector<int>& arr, int& k) {
+    
+    int minimizeCost(int k, vector<int>& arr) {
         int n=arr.size();
         vector<int>dp(n+1,-1);
         return solve(arr,dp,n-1,k);
     }
 };
+
+
+
+
+
+
 
 //{ Driver Code Starts.
 
@@ -49,7 +57,7 @@ int main() {
             arr.push_back(number);
         }
         Solution obj;
-        int res = obj.minimizeCost(arr, k);
+        int res = obj.minimizeCost(k, arr);
         cout << res << endl;
         // string tl;
         // getline(cin, tl);
@@ -57,4 +65,4 @@ int main() {
     return 0;
 }
 
-// } Driver Code Ends 
+// } Driver Code Ends
