@@ -7,21 +7,22 @@ using namespace std;
 
 
 class Solution {
-  public:
+public:
     int maxDistance(vector<int> &arr) {
-          unordered_map<int, int> mp; 
-    for( int i=0 ;i<arr.size();i++){
-        mp[arr[i]] = i;
-         
-    }
-        int dist = 0;
-    for (int i = 0; i < arr.size(); i++) {
-        if (mp.find(arr[i]) != mp.end()) {
-         
-            dist = max(dist, abs(i - mp[arr[i]]));
+        unordered_map<int, int> mp;  
+        int dist = 0;  
+    
+        for (int i = 0; i < arr.size(); i++) {
+          
+            if (mp.find(arr[i]) == mp.end()) {
+                mp[arr[i]] = i; 
+            } else {
+             
+                dist = max(dist, i - mp[arr[i]]);
+            }
         }
-    }
-        return dist;
+
+        return dist;  
     }
 };
 
