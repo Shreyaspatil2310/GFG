@@ -27,17 +27,11 @@ class Solution {
   public:
     // Function to count nodes of a linked list.
     int getCount(struct Node* head) {
-        int cnt= 0;
-       Node * temp = head;
-       while (temp != NULL){
-           cnt++;
-           //cout<<temp -> data;
-           temp = temp -> next ;
-       }
-       return cnt;  
+        int len = 0; // length of linked list
+        for(; head != NULL ; head = head->next , len++); // count until null node
+        return len;
     }
 };
-
 
 //{ Driver Code Starts.
 
