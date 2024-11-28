@@ -5,45 +5,33 @@ using namespace std;
 
 // } Driver Code Ends
 //User function template for C++
+
+
 class Solution {
   public:
     int myAtoi(char *s) {
         // Your code here
-        int i = 0;
-
-        // Skip leading spaces
-        while (s[i] == ' ') {
-            i++;
-        }
-    
-        // Determine the sign
+                string str(s);
         int sign = 1;
-        if (s[i] == '+' || s[i] == '-') {
-            if (s[i] == '-') {
-                sign = -1;
-            }
-            i++;
-        }
-    
-        // Parse the digits and handle overflow/underflow
-        long result = 0;
-        while (std::isdigit(s[i])) {
-            result = result * 10 + (s[i] - '0');
-    
-            if (result * sign > INT_MAX) {
-                return INT_MAX;
-            }
-            if (result * sign < INT_MIN) {
+        int index=0;
+        int n = str.size();
+        while(index<n && (str[index]==' '))
+            index++;
+        long long finalResult = 0;
+        for(int i=index;i<n;i++) {
+            if(i==0 && str[i]=='-')
+                sign=-1;
+            else if(str[i]>='0' && str[i]<='9')
+                finalResult=finalResult*10 + (str[i]-'0');
+            else
+                break;
+            if(sign==-1 && -finalResult<INT_MIN)
                 return INT_MIN;
-            }
-            i++;
+            if(sign==1 && finalResult>INT_MAX)
+                return INT_MAX;
         }
-    
-        return static_cast<int>(result * sign);
-        
+        return sign*finalResult;
     }
-
-
 };
 
 
