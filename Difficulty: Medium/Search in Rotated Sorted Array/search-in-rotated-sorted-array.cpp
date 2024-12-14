@@ -5,39 +5,46 @@ using namespace std;
 
 // } Driver Code Ends
 
+
 class Solution {
-  public:
-    int search(vector<int>& arr, int key) {
-        int l=0, h=arr.size()-1;
+    int get_index(vector<int> &arr){
         
-        while(l<=h){
-            int mid = l + (h-l)/2;
+        int st = 0 ;
+        int ed = arr.size()-1;
+        while(st < ed){
+            int mid = (st+ed)/2;
             
-            if(arr[mid] == key){
-                return mid;
+            if(arr[0] <= arr[mid]){
+                st = mid+1;
             }
-            
-            else if(arr[l] <= arr[mid]){
-                if(arr[l] <= key && key <= arr[mid]){
-                    h = mid - 1;
-                }
-                else{
-                    l = mid + 1;
-                }
-            }
-            else{
-                if(arr[mid] <= key && key <= arr[h]){
-                    l = mid + 1;
-                }
-                else{
-                    h = mid - 1;
-                }
-            }
+            else ed = mid;
         }
-        
+        return st;
+    }
+    int binary_search(vector<int>&arr,int s,int e,int &k){
+        int st = s;
+        int end =e;
+        while(st <= end){
+            int mid = (st+end)/2;
+            if(arr[mid]==k) return mid;
+            else if(arr[mid] > k) end = mid -1;
+            else st = mid+1;
+        }
         return -1;
     }
+  public:
+    int search(vector<int>& arr, int key) {
+        int pivot  = get_index(arr);
+        int n = arr.size();
+        if(arr[pivot] <= key && key <= arr[n-1]) {
+            return binary_search(arr,pivot,n-1,key);
+        }
+        else return binary_search(arr,0,pivot-1,key);
+        
+    }
 };
+
+
 
 //{ Driver Code Starts.
 int main() {
@@ -57,6 +64,7 @@ int main() {
         cin >> key;
         Solution ob;
         cout << ob.search(arr, key) << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
