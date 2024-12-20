@@ -6,44 +6,42 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    vector<int> spirallyTraverse(vector<vector<int> > &matrix) {
-        // code here
-        vector<int> ans;
-        int left = 0, right = matrix[0].size()-1, top =0, bottom = matrix.size()-1;
-        int direction =0;
-        while(left<=right && top<= bottom){
-            //move left to right
-            if(direction==0){
-                for(int i=left;i<=right;i++){
-                    ans.push_back(matrix[top][i]);
-                }
-                top++;
+    vector<int> spirallyTraverse(vector<vector<int> > &mat) {
+        
+        vector<int> ans; 
+        int i1 = 0; 
+        int i2 = mat.size()-1; 
+        int j1 = 0;
+        int j2 = mat[0].size()-1;
+    
+        
+        while(i1<=i2 && j1<=j2){
+            for(int p = j1;p <= j2;p++){
+                ans.push_back(mat[i1][p]) ;
             }
-            // move top to bottom
-            else if(direction==1){
-                for(int i=top;i<=bottom;i++){
-                    ans.push_back(matrix[i][right]);
-                }
-                right--;
+            i1++; 
+            for(int q = i1;q <= i2;q++){
+                ans.push_back(mat[q][j2]); 
             }
-            // move right to left
-            else if(direction==2){
-                for(int i=right;i>=left;i--){
-                    ans.push_back(matrix[bottom][i]);
+            j2--; 
+            if(i1<=i2){
+                for(int r = j2;r >= j1;r--){
+                ans.push_back(mat[i2][r]);
                 }
-                bottom--;
+                i2--;
             }
-            //move boottom to top
-            else if(direction==3){
-                for(int i=bottom;i>=top;i--){
-                    ans.push_back(matrix[i][left]);
+            
+            if(j1<=j2){
+                for(int s = i2;s >= i1;s--){
+                    ans.push_back(mat[s][j1]); 
                 }
-                left++;
+                j1++; 
             }
-            direction = (direction+1)%4;
-        }
-        return ans;
+        }  
+        
+        return ans; 
     }
+    
 };
 
 //{ Driver Code Starts.
@@ -54,9 +52,10 @@ int main() {
     while (t--) {
         int r, c;
         cin >> r >> c;
-        vector<vector<int>> matrix(r, vector<int>(c, 0));
+        vector<vector<int>> matrix(r);
 
         for (int i = 0; i < r; i++) {
+            matrix[i].assign(c, 0);
             for (int j = 0; j < c; j++) {
                 cin >> matrix[i][j];
             }
@@ -67,6 +66,9 @@ int main() {
         for (int i = 0; i < result.size(); ++i)
             cout << result[i] << " ";
         cout << endl;
+
+        cout << "~"
+             << "\n";
     }
     return 0;
 }
